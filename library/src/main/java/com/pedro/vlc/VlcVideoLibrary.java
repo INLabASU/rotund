@@ -32,26 +32,26 @@ public class VlcVideoLibrary implements MediaPlayer.EventListener {
   public VlcVideoLibrary(Context context, VlcListener vlcListener, SurfaceView surfaceView) {
     this.vlcListener = vlcListener;
     this.surfaceView = surfaceView;
-    vlcInstance = new LibVLC(context, new VlcOptions().getDefaultOptions());
+    vlcInstance = new LibVLC(new VlcOptions().getDefaultOptions());
   }
 
   public VlcVideoLibrary(Context context, VlcListener vlcListener, TextureView textureView) {
     this.vlcListener = vlcListener;
     this.textureView = textureView;
-    vlcInstance = new LibVLC(context, new VlcOptions().getDefaultOptions());
+    vlcInstance = new LibVLC(new VlcOptions().getDefaultOptions());
   }
 
   public VlcVideoLibrary(Context context, VlcListener vlcListener, SurfaceTexture surfaceTexture) {
     this.vlcListener = vlcListener;
     this.surfaceTexture = surfaceTexture;
-    vlcInstance = new LibVLC(context, new VlcOptions().getDefaultOptions());
+    vlcInstance = new LibVLC(new VlcOptions().getDefaultOptions());
   }
 
   public VlcVideoLibrary(Context context, VlcListener vlcListener, Surface surface) {
     this.vlcListener = vlcListener;
     this.surface = surface;
     surfaceHolder = null;
-    vlcInstance = new LibVLC(context, new VlcOptions().getDefaultOptions());
+    vlcInstance = new LibVLC(new VlcOptions().getDefaultOptions());
   }
 
   public VlcVideoLibrary(Context context, VlcListener vlcListener, Surface surface,
@@ -59,7 +59,7 @@ public class VlcVideoLibrary implements MediaPlayer.EventListener {
     this.vlcListener = vlcListener;
     this.surface = surface;
     this.surfaceHolder = surfaceHolder;
-    vlcInstance = new LibVLC(context, new VlcOptions().getDefaultOptions());
+    vlcInstance = new LibVLC(new VlcOptions().getDefaultOptions());
   }
 
   public boolean isPlaying() {
@@ -118,7 +118,7 @@ public class VlcVideoLibrary implements MediaPlayer.EventListener {
       throw new RuntimeException("You cant set a null render object");
     }
     vlcOut.attachViews();
-    player.setVideoTrackEnabled(true);
+//    player.setVideoTrackEnabled(true);
     player.play();
   }
 
@@ -135,4 +135,7 @@ public class VlcVideoLibrary implements MediaPlayer.EventListener {
         break;
     }
   }
+
+//  public getMediaWidth(){
+//  }
 }
