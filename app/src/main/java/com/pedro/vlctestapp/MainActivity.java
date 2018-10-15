@@ -25,13 +25,14 @@ public class MainActivity extends AppCompatActivity implements VlcListener, View
   private VlcVideoLibrary vlcVideoLibrary;
   private Button bStartStop;
   private EditText etEndpoint;
+  private SurfaceView surfaceView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     setContentView(R.layout.activity_main);
-    SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
+    surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
     surfaceView.getHolder().addCallback(new SHCallback());
     bStartStop = (Button) findViewById(R.id.b_start_stop);
     bStartStop.setOnClickListener(this);
@@ -60,7 +61,9 @@ public class MainActivity extends AppCompatActivity implements VlcListener, View
   public void onClick(View view) {
     if (!vlcVideoLibrary.isPlaying()) {
       vlcVideoLibrary.play(etEndpoint.getText().toString());
-      bStartStop.setText(getString(R.string.stop_player));
+//      bStartStop.setText(getString(R.string.stop_player));
+      bStartStop.setVisibility(View.INVISIBLE);
+      etEndpoint.setVisibility(View.INVISIBLE);
     } else {
       vlcVideoLibrary.stop();
       bStartStop.setText(getString(R.string.start_player));
@@ -86,6 +89,18 @@ public class MainActivity extends AppCompatActivity implements VlcListener, View
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+      //Get the SurfaceView layout parameters
+      android.view.ViewGroup.LayoutParams lp = surfaceView.getLayoutParams();
+
+      //Set the width of the SurfaceView to the width of the screen
+      lp.width = 1080;
+
+      //Set the height of the SurfaceView to match the aspect ratio of the video
+      //be sure to cast these as floats otherwise the calculation will likely be 0
+      lp.height = 1794;
+
+      //Commit the layout parameters
+      surfaceView.setLayoutParams(lp);
 
     }
 
